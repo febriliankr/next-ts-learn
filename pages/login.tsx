@@ -5,13 +5,14 @@ function login() {
   const [username, setUsername] = useState<string>("administrator");
   const [password, setPassword] = useState<string>("");
 
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<string>("Please login to access");
+  const [secret, setSecret] = useState<string>("");
 
   async function handleSubmit() {
     const res = await fetch("api/login", {
       method: "POST",
       headers: {
-          'Content-type': 'application/json'
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         username,
@@ -28,6 +29,20 @@ function login() {
           json.admin ? "an admin!" : "not an admin!"
         }`
       );
+
+      const res = await fetch("api/secret", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+        }),
+      }).then((t) => t.json());
+
+      if (res.secret) {
+        setSecret(res.secretAdminCode);
+      } else setSecret("Nothing available");
     } else {
       setMessage("Something went wrong!");
     }
@@ -35,6 +50,7 @@ function login() {
 
   return (
     <div>
+      <h1>{secret}</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
