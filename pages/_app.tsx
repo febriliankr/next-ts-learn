@@ -1,5 +1,7 @@
-import "../styles/globals.css";
-export default function App({Component, pageProps}) {
-  console.log('HELLO FROM APP.tsx')
-  return <Component {...pageProps}/>
+import "./globals.scss";
+
+function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
+
+export default App;

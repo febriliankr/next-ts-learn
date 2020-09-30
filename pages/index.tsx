@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div>
-      <h1>This is index.tsx</h1>
+    <div className="pink">
+      <h1>This is index.<span>tsx</span></h1>
     </div>
   )
 }
